@@ -16,18 +16,9 @@ public class SQLDatabaseServices {
     // Store Request in SQL Table
     public String storeData(RequestDatabase data){
 
-        RequestDatabase smsRequest = databaseRepository.save(data);
-        return smsRequest.getRequestId();
+        RequestDatabase requestData = databaseRepository.save(data);
+        return requestData.getRequestId();
 
-    }
-
-    // Update Status of Request
-    public void updateStatusSuccess(){
-        return;
-    }
-
-    public void updateStatusFailure(){
-        return;
     }
 
     // Fetch Data corresponding to a request

@@ -32,6 +32,7 @@ public class RedisCacheServices {
 
             phoneNumber = phoneNumber.trim();
             if(!PhoneNumberValidator.isPhoneNumberValid(phoneNumber) || Boolean.TRUE.equals(checkIfBlacklisted(phoneNumber))) {
+                logger.warn("Provided Number is invalid or Already blacklisted: {}", phoneNumber);
                 continue;
             }
 
@@ -61,6 +62,7 @@ public class RedisCacheServices {
 
             phoneNumber = phoneNumber.trim();
             if(!PhoneNumberValidator.isPhoneNumberValid(phoneNumber) || Boolean.FALSE.equals(checkIfBlacklisted(phoneNumber))) {
+                logger.warn("Provided Number is invalid or does not exist in blacklist: {}", phoneNumber);
                 continue;
             }
 

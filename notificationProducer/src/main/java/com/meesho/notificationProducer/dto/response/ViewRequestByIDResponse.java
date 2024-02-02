@@ -1,18 +1,16 @@
 package com.meesho.notificationProducer.dto.response;
 
 import com.meesho.notificationProducer.models.RequestDatabase;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@ToString
+@Data
+@Builder
 
-public class ViewRequestByIDResponse {
+public class ViewRequestByIDResponse extends ResponseObject {
 
     private RequestDatabase smsRequest;
+    private String comments;
 
 }

@@ -6,11 +6,10 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@ToString
 @Builder
+@Data
 
-public class FetchBlacklistResponse {
+public class FetchBlacklistResponse extends ResponseObject {
 
     private String comments;
     private List<String> blacklist;

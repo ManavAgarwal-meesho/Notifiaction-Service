@@ -7,3 +7,6 @@ Technologies Used:
 - Redis
 - Elastic Search
 - Docker
+
+Producer = localhost:8081
+Consumer = localhost:8082

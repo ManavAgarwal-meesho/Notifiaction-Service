@@ -1,4 +1,4 @@
-package com.meesho.notificationProducer.controllers;
+package com.meesho.notificationConsumer.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

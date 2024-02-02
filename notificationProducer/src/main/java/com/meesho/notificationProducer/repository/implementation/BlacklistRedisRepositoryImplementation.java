@@ -5,9 +5,11 @@ import com.meesho.notificationProducer.models.BlacklistRedis;
 import com.meesho.notificationProducer.repository.BlacklistRedisRepository;
 import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.HashOperations;
+import org.springframework.stereotype.Repository;
 
 import java.util.Map;
 
+@Repository
 public class BlacklistRedisRepositoryImplementation implements BlacklistRedisRepository {
 
     private static final String HASH_REFERENCE = Constants.HASH_REFERENCE;

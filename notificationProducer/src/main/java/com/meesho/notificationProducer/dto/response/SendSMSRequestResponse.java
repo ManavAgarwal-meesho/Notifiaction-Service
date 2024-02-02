@@ -7,6 +7,7 @@ import lombok.*;
 @Data
 @Builder
 
-public class AddOrRemoveBlacklistResponse extends ResponseObject {
+public class SendSMSRequestResponse extends ResponseObject {
+    private String requestId;
     private String comments;
 }
