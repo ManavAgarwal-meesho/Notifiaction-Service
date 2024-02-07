@@ -59,16 +59,16 @@ public class KafkaListenerService {
             }
 
             /* Step 3 : Call the 3rd Party API for sending message */
-//            if(Boolean.TRUE.equals(thirdPartyAPIServices.sendSMSAPI(requestData))){
-//                logger.info("Successfully sent the message using Third Party API");
-//
-//                if(Boolean.FALSE.equals(sqlDatabaseServices.updateStatusOnSuccess(requestId))) {
-//                    throw new Error(String.format("Error while updating status for request Id : %s", requestId));
-//                }
-//
-//            } else {
-//                throw new Error(String.format("Error while sending SMS from Third party API with request Id : %s", requestId));
-//            }
+            if(Boolean.TRUE.equals(thirdPartyAPIServices.sendSMSAPI(requestData))){
+                logger.info("Successfully sent the message using Third Party API");
+
+                if(Boolean.FALSE.equals(sqlDatabaseServices.updateStatusOnSuccess(requestId))) {
+                    throw new Error(String.format("Error while updating status for request Id : %s", requestId));
+                }
+
+            } else {
+                throw new Error(String.format("Error while sending SMS from Third party API with request Id : %s", requestId));
+            }
 
             /* Step 4 : Index the message content in the ES */
             ESDocument esDocument = ESDocument.builder()
