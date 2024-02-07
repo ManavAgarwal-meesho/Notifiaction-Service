@@ -6,7 +6,6 @@ Technologies Used:
 - Kafka
 - Redis
 - ElasticSearch
-- Docker
 
 Producer => localhost:8081
 <br>
