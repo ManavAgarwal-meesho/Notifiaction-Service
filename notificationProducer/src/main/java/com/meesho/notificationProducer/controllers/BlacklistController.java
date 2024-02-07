@@ -19,14 +19,14 @@ import java.util.List;
 public class BlacklistController {
     private final RedisCacheServices redisServices;
 
-    Logger logger = LoggerFactory.getLogger(BlacklistController.class);
+    private final static Logger logger = LoggerFactory.getLogger(BlacklistController.class);
 
     @Autowired
     BlacklistController(RedisCacheServices redisServices) {
         this.redisServices = redisServices;
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<ResponseObject> addPhoneNumbersToBlacklist(@Valid @RequestBody AddOrRemoveBlacklistRequest blacklistRequest) {
 
         try{
@@ -55,7 +55,7 @@ public class BlacklistController {
         }
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping
     public ResponseEntity<ResponseObject> removePhoneNumbersFromBlacklist(@Valid @RequestBody AddOrRemoveBlacklistRequest blacklistRequest) {
 
         try{
@@ -83,8 +83,8 @@ public class BlacklistController {
         }
     }
 
-    @GetMapping("/")
-    public ResponseEntity<?> fetchPhoneNumberBlacklist() {
+    @GetMapping
+    public ResponseEntity<ResponseObject> fetchPhoneNumberBlacklist() {
         try{
             List<String> fetchedBlacklist = redisServices.getAllBlacklistedNumbers();
 

@@ -82,10 +82,9 @@ public class SMSRequestController {
     }
 
     @GetMapping("/view/{request_id}")
-    public ResponseEntity<ResponseObject> fetchSMS(@Valid @RequestBody ViewRequestByID payload) {
+    public ResponseEntity<ResponseObject> fetchSMS(@PathVariable(value="request_id") String requestId) {
 
         try{
-            String requestId = payload.getRequestId();
             Optional<RequestDatabase> fetchedSMSRequest = sqlServices.fetchById(requestId);
 
             if(fetchedSMSRequest.isPresent()){
