@@ -1,12 +1,13 @@
 A Notification Service built on Spring Boot Framework
 
 Technologies Used:
-- Springboot
+- Spring boot
 - MySQL
 - Kafka
 - Redis
-- Elastic Search
+- ElasticSearch
 - Docker
 
-Producer = localhost:8081
-Consumer = localhost:8082
+Producer => localhost:8081
+<br>
+Consumer => localhost:8082

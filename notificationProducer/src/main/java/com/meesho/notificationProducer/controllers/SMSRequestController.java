@@ -24,18 +24,14 @@ import java.util.Optional;
 @RequestMapping(path="/api/sms")
 public class SMSRequestController {
 
-    private final KafkaProducerService producer;
-    private final SQLDatabaseServices sqlServices;
-    private final RedisCacheServices  redisServices;
+    @Autowired
+    private KafkaProducerService producer;
+    @Autowired
+    private SQLDatabaseServices sqlServices;
+    @Autowired
+    private RedisCacheServices  redisServices;
 
     Logger logger = LoggerFactory.getLogger(SMSRequestController.class);
-
-    @Autowired
-    SMSRequestController(KafkaProducerService producer, SQLDatabaseServices sqlServices, RedisCacheServices redisServices) {
-        this.producer      = producer;
-        this.sqlServices   = sqlServices;
-        this.redisServices = redisServices;
-    }
 
     @PostMapping("/send")
     public ResponseEntity<ResponseObject> sendSMS(@Valid @RequestBody SendSMSRequest payload) {
@@ -74,7 +70,7 @@ public class SMSRequestController {
             logger.error(error.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment("Error sending message! Phone Number is Blacklisted")
-                    .error(error)
+                    .errorStack(error.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -104,7 +100,7 @@ public class SMSRequestController {
             logger.error(error.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment(error.toString())
-                    .error(error)
+                    .errorStack(error.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);

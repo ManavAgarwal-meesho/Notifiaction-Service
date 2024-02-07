@@ -48,7 +48,7 @@ public class BlacklistController {
             logger.error(error.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment(error.toString())
-                    .error(error)
+                    .errorStack(error.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -76,7 +76,7 @@ public class BlacklistController {
             logger.error(error.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment(error.toString())
-                    .error(error)
+                    .errorStack(error.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -102,7 +102,7 @@ public class BlacklistController {
             logger.error(error.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment(error.toString())
-                    .error(error)
+                    .errorStack(error.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -121,7 +121,7 @@ public class BlacklistController {
             logger.error(error.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment(error.toString())
-                    .error(error)
+                    .errorStack(error.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);

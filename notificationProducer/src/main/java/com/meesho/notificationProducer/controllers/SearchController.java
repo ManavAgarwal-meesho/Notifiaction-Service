@@ -48,15 +48,16 @@ public class SearchController {
                 logger.error(error.toString());
                 ErrorResponse response = ErrorResponse.builder()
                         .errorComment(error.toString())
-                        .error(error)
+                        .errorStack(error.getStackTrace())
                         .build();
 
                 return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-        } catch (IOException e) {
 
+        } catch (IOException e) {
             logger.error(e.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment(e.toString())
+                    .errorStack(e.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -68,6 +69,7 @@ public class SearchController {
     public ResponseEntity<ResponseObject> searchForPhoneNumberInRange(@Valid @RequestBody SearchESbyPhoneNumber payload, @RequestParam Integer page) {
 
         try{
+
             String startTime = ConvertStringTimeToDates.convertStringTimestampToDate(payload.getStartTime());
             String endTime = ConvertStringTimeToDates.convertStringTimestampToDate(payload.getEndTime());
 
@@ -86,14 +88,17 @@ public class SearchController {
             logger.error(error.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment(error.toString())
-                    .error(error)
+                    .errorStack(error.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+
         } catch (IOException e) {
+
             logger.error(e.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment(e.toString())
+                    .errorStack(e.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);

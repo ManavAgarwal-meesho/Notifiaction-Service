@@ -9,5 +9,5 @@ import lombok.*;
 
 public class ErrorResponse extends ResponseObject {
     private String errorComment;
-    private Error error;
+    private StackTraceElement[] errorStack;
 }
