@@ -70,7 +70,6 @@ public class SMSRequestController {
             logger.error(error.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment("Error sending message! Phone Number is Blacklisted")
-                    .errorStack(error.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -100,7 +99,6 @@ public class SMSRequestController {
             logger.error(error.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment(error.toString())
-                    .errorStack(error.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);

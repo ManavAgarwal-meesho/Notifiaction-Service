@@ -4,7 +4,7 @@ import com.meesho.notificationProducer.dto.request.SearchESbyPhoneNumber;
 import com.meesho.notificationProducer.dto.request.SearchESbyText;
 import com.meesho.notificationProducer.dto.response.ErrorResponse;
 import com.meesho.notificationProducer.dto.response.ResponseObject;
-import com.meesho.notificationProducer.dto.response.SearchESbyTextResponse;
+import com.meesho.notificationProducer.dto.response.SearchESResponse;
 import com.meesho.notificationProducer.models.ESDocument;
 import com.meesho.notificationProducer.services.storageServices.ElasticSearchServices;
 import com.meesho.notificationProducer.utils.ConvertStringTimeToDates;
@@ -38,7 +38,7 @@ public class SearchController {
             Page<ESDocument> res = esServices.getDocumentsByKeyword(payload.getKeyword(), page);
             logger.info(res.toString());
 
-            SearchESbyTextResponse response = SearchESbyTextResponse.builder()
+            SearchESResponse response = SearchESResponse.builder()
                     .documents(res.getContent())
                     .build();
 
@@ -48,7 +48,6 @@ public class SearchController {
                 logger.error(error.toString());
                 ErrorResponse response = ErrorResponse.builder()
                         .errorComment(error.toString())
-                        .errorStack(error.getStackTrace())
                         .build();
 
                 return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -57,7 +56,6 @@ public class SearchController {
             logger.error(e.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment(e.toString())
-                    .errorStack(e.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -78,7 +76,7 @@ public class SearchController {
             Page<ESDocument> res = esServices.getDocumentsByPhoneNumber(phoneNumber, startTime, endTime, page);
             logger.info(res.toString());
 
-            SearchESbyTextResponse response = SearchESbyTextResponse.builder()
+            SearchESResponse response = SearchESResponse.builder()
                     .documents(res.getContent())
                     .build();
 
@@ -88,7 +86,6 @@ public class SearchController {
             logger.error(error.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment(error.toString())
-                    .errorStack(error.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -98,7 +95,6 @@ public class SearchController {
             logger.error(e.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment(e.toString())
-                    .errorStack(e.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);

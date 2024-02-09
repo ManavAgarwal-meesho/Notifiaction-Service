@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Data
-public class SearchESbyTextResponse extends ResponseObject{
+public class SearchESResponse extends ResponseObject{
 
     List<ESDocument> documents;
 

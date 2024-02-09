@@ -28,7 +28,7 @@ public class ESDocument {
     @Field(type = FieldType.Text, name = "message")
     private String message;
 
-    @Field(type = FieldType.Date, name = "time")
+    @Field(type = FieldType.Date, name = "created_at")
     private Date createdAt;
 
 }

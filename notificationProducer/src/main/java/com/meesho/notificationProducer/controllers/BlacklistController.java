@@ -1,5 +1,6 @@
 package com.meesho.notificationProducer.controllers;
 
+import com.meesho.notificationProducer.constants.Constants;
 import com.meesho.notificationProducer.dto.request.AddOrRemoveBlacklistRequest;
 import com.meesho.notificationProducer.dto.request.CheckIfBlacklistedRequest;
 import com.meesho.notificationProducer.dto.response.*;
@@ -17,14 +18,11 @@ import java.util.List;
 @RestController
 @RequestMapping(path="/api/blacklist")
 public class BlacklistController {
-    private final RedisCacheServices redisServices;
-
-    private final static Logger logger = LoggerFactory.getLogger(BlacklistController.class);
 
     @Autowired
-    BlacklistController(RedisCacheServices redisServices) {
-        this.redisServices = redisServices;
-    }
+    private RedisCacheServices redisServices;
+
+    private final static Logger logger = LoggerFactory.getLogger(BlacklistController.class);
 
     @PostMapping
     public ResponseEntity<ResponseObject> addPhoneNumbersToBlacklist(@Valid @RequestBody AddOrRemoveBlacklistRequest blacklistRequest) {
@@ -38,7 +36,7 @@ public class BlacklistController {
             logger.info("Added Phone Numbers to Cache Successfully!!");
 
             AddOrRemoveBlacklistResponse response = AddOrRemoveBlacklistResponse.builder()
-                    .comments("Successfully Added to Blacklist")
+                    .comments(Constants.NUMBERS_ADDED_TO_BLACKLIST)
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -48,7 +46,6 @@ public class BlacklistController {
             logger.error(error.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment(error.toString())
-                    .errorStack(error.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -67,7 +64,7 @@ public class BlacklistController {
             logger.info("Removed Phone Numbers from Cache Successfully!!");
 
             AddOrRemoveBlacklistResponse response = AddOrRemoveBlacklistResponse.builder()
-                    .comments("Successfully Removed from Blacklist")
+                    .comments(Constants.NUMBERS_DELETED_FROM_BLACKLIST)
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -76,7 +73,6 @@ public class BlacklistController {
             logger.error(error.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment(error.toString())
-                    .errorStack(error.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -102,7 +98,6 @@ public class BlacklistController {
             logger.error(error.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment(error.toString())
-                    .errorStack(error.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -121,7 +116,6 @@ public class BlacklistController {
             logger.error(error.toString());
             ErrorResponse response = ErrorResponse.builder()
                     .errorComment(error.toString())
-                    .errorStack(error.getStackTrace())
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
