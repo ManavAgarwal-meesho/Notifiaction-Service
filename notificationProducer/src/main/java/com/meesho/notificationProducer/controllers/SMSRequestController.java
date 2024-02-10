@@ -1,7 +1,6 @@
 package com.meesho.notificationProducer.controllers;
 
 import com.meesho.notificationProducer.dto.request.SendSMSRequest;
-import com.meesho.notificationProducer.dto.request.ViewRequestByID;
 import com.meesho.notificationProducer.dto.response.ErrorResponse;
 import com.meesho.notificationProducer.dto.response.ResponseObject;
 import com.meesho.notificationProducer.dto.response.SendSMSRequestResponse;

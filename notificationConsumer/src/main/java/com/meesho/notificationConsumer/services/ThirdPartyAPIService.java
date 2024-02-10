@@ -5,7 +5,6 @@ import com.meesho.notificationConsumer.dto.request.thirdPatyAPI.RequestBodyChann
 import com.meesho.notificationConsumer.dto.request.thirdPatyAPI.RequestBodyDestination;
 import com.meesho.notificationConsumer.dto.request.thirdPatyAPI.RequestBodyTemplate;
 import com.meesho.notificationConsumer.dto.request.thirdPatyAPI.RequestChannelSms;
-import com.meesho.notificationConsumer.dto.response.ThirdPartyAPIResponse;
 import com.meesho.notificationConsumer.models.RequestDatabase;
 import com.meesho.notificationConsumer.repository.RequestDatabaseRepository;
 import org.slf4j.Logger;

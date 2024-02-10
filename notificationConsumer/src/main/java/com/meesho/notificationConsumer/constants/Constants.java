@@ -13,4 +13,4 @@ public class Constants {
     public static final String DB_REQUEST_SUCCESSFUL   = "Request Executed Successfully!";
     public static final String DB_REQUEST_FAILURE      = "Request faced an Error!";
 
-};
+}

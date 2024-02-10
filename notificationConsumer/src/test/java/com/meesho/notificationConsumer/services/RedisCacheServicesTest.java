@@ -1,7 +1,6 @@
 package com.meesho.notificationConsumer.services;
 
 import com.meesho.notificationConsumer.constants.Constants;
-import com.meesho.notificationConsumer.models.ESDocument;
 import com.meesho.notificationConsumer.repository.BlacklistRedisRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -9,8 +8,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

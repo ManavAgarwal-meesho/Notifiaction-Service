@@ -1,6 +1,5 @@
 package com.meesho.notificationConsumer.services;
 
-import com.meesho.notificationConsumer.models.ESDocument;
 import com.meesho.notificationConsumer.models.RequestDatabase;
 import com.meesho.notificationConsumer.repository.RequestDatabaseRepository;
 import org.junit.jupiter.api.BeforeAll;

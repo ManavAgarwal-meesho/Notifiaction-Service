@@ -1,14 +1,11 @@
 package com.meesho.notificationConsumer.services;
 
 import com.meesho.notificationConsumer.constants.Constants;
-import com.meesho.notificationConsumer.models.RequestDatabase;
 import com.meesho.notificationConsumer.repository.RequestDatabaseRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class SQLDatabaseServices {

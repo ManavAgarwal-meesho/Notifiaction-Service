@@ -3,7 +3,6 @@ package com.meesho.notificationProducer.services.storageServicesTest;
 import com.meesho.notificationProducer.models.BlacklistRedis;
 import com.meesho.notificationProducer.repository.BlacklistRedisRepository;
 import com.meesho.notificationProducer.services.storageServices.RedisCacheServices;
-import com.meesho.notificationProducer.utils.PhoneNumberValidator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

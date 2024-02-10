@@ -1,12 +1,8 @@
 package com.meesho.notificationProducer.utils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 
 public class ConvertStringTimeToDates {
     public static String convertStringTimestampToDate(String timeStamp) {
