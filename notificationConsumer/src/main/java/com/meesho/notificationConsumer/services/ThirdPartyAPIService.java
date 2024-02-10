@@ -25,14 +25,15 @@ public class ThirdPartyAPIService {
     @Autowired
     private RequestDatabaseRepository requestDatabaseRepository;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     Logger logger = LoggerFactory.getLogger(ThirdPartyAPIService.class);
 
     public Boolean sendSMSAPI(RequestDatabase requestData){
         try {
             String API_KEY = Constants.THIRD_PARTY_API_KEY;
             String API_URL = Constants.THIRD_PARTY_API;
-
-            RestTemplate requestTemplate = new RestTemplate();
 
             HttpHeaders requestHeaders   = new HttpHeaders();
             requestHeaders.setContentType(MediaType.APPLICATION_JSON);
@@ -41,14 +42,18 @@ public class ThirdPartyAPIService {
             RequestBodyTemplate requestBody = requestBodyBuilder(requestData);
 
             HttpEntity<RequestBodyTemplate> request = new HttpEntity<>(requestBody, requestHeaders);
-            Object response = requestTemplate.postForObject(API_URL, request, Object.class);
+            Object response = restTemplate.postForObject(API_URL, request, Object.class);
 
             logger.info("Response From 3rd Party Api : {}", response);
 
             return Boolean.TRUE;
-        }
-        catch (Error err){
+
+        } catch (Error err){
             logger.error(err.getMessage());
+            return Boolean.FALSE;
+
+        } catch (Exception ex){
+            logger.error(ex.getMessage());
             return Boolean.FALSE;
         }
     }

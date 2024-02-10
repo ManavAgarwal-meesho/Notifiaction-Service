@@ -1,7 +1,6 @@
 package com.meesho.notificationProducer.services;
 
 import com.meesho.notificationProducer.constants.Constants;
-import org.apache.kafka.clients.producer.Producer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 @Service
 public class KafkaProducerService {
 
-    private final static Logger logger = LoggerFactory.getLogger(Producer.class);
+    private final static Logger logger = LoggerFactory.getLogger(KafkaProducerService.class);
     private static final String TOPIC = Constants.KAFKA_TOPIC;
 
     @Autowired

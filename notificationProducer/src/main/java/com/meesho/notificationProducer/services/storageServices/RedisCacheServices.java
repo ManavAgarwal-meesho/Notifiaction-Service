@@ -26,13 +26,20 @@ public class RedisCacheServices {
     private final static Logger logger = LoggerFactory.getLogger(RedisCacheServices.class);
 
     // Add phone numbers to Blacklist
-    public void addNumbersToBlacklist(@NotNull @NotEmpty List<String> phoneNumbers){
+    public Boolean addNumbersToBlacklist(@NotNull @NotEmpty List<String> phoneNumbers){
+
+        Boolean savedSuccessfully = Boolean.TRUE;
 
         for(String phoneNumber : phoneNumbers){
 
             phoneNumber = phoneNumber.trim();
-            if(!PhoneNumberValidator.isPhoneNumberValid(phoneNumber) || Boolean.TRUE.equals(checkIfBlacklisted(phoneNumber))) {
-                logger.warn("Provided Number is invalid or Already blacklisted: {}", phoneNumber);
+
+            if(!PhoneNumberValidator.isPhoneNumberValid(phoneNumber)) {
+                logger.warn("Provided Number is invalid : {}", phoneNumber);
+                continue;
+            }
+            if(Boolean.TRUE.equals(checkIfBlacklisted(phoneNumber))) {
+                logger.warn("Provided Number is already blacklisted: {}", phoneNumber);
                 continue;
             }
 
@@ -43,10 +50,11 @@ public class RedisCacheServices {
                     .phoneNumber(phoneNumber)
                     .build();
 
-            redisBlacklistRepository.addToBlacklist(blacklistRedisEntry);
+            savedSuccessfully = savedSuccessfully & redisBlacklistRepository.addToBlacklist(blacklistRedisEntry);
             logger.info("New Number Blacklisted in Redis {}", phoneNumber);
         }
 
+        return savedSuccessfully;
     }
 
     // Check if a number exists in blacklist

@@ -19,8 +19,15 @@ public class ElasticSearchServices {
         try{
             ESRepository.save(esDocument);
             return Boolean.TRUE;
+
         } catch (Error err) {
+
             logger.error(err.getMessage());
+            return Boolean.FALSE;
+
+        } catch (Exception ex) {
+
+            logger.error(ex.getMessage());
             return Boolean.FALSE;
         }
     }

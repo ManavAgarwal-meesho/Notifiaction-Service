@@ -7,7 +7,7 @@ import java.util.Map;
 
 @Repository
 public interface BlacklistRedisRepository {
-    void addToBlacklist(BlacklistRedis blk);
+    Boolean addToBlacklist(BlacklistRedis blk);
 
     void removeFromBlacklist(String phoneNumber);
 

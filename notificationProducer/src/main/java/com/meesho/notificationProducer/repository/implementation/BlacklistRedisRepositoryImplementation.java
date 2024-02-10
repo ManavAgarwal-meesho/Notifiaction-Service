@@ -17,8 +17,8 @@ public class BlacklistRedisRepositoryImplementation implements BlacklistRedisRep
     private HashOperations<String, String, BlacklistRedis> redisOperations;
 
     @Override
-    public void addToBlacklist(BlacklistRedis blk) {
-        redisOperations.putIfAbsent(HASH_REFERENCE, blk.getId(), blk);
+    public Boolean addToBlacklist(BlacklistRedis blk) {
+        return redisOperations.putIfAbsent(HASH_REFERENCE, blk.getId(), blk);
     }
 
     /*  referenceKey = HASH_REFERENCE +"_" + blacklistNumber    */

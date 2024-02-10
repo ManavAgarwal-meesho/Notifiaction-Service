@@ -12,13 +12,13 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/search")
@@ -35,11 +35,11 @@ public class SearchController {
 
         try{
 
-            Page<ESDocument> res = esServices.getDocumentsByKeyword(payload.getKeyword(), page);
-            logger.info(res.toString());
+            List<ESDocument> result = esServices.getDocumentsByKeyword(payload.getKeyword(), page);
+            logger.info(result.toString());
 
             SearchESResponse response = SearchESResponse.builder()
-                    .documents(res.getContent())
+                    .documents(result)
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -73,11 +73,11 @@ public class SearchController {
 
             String phoneNumber = payload.getPhoneNumber();
 
-            Page<ESDocument> res = esServices.getDocumentsByPhoneNumber(phoneNumber, startTime, endTime, page);
+            List<ESDocument> res = esServices.getDocumentsByPhoneNumber(phoneNumber, startTime, endTime, page);
             logger.info(res.toString());
 
             SearchESResponse response = SearchESResponse.builder()
-                    .documents(res.getContent())
+                    .documents(res)
                     .build();
 
             return new ResponseEntity<>(response, HttpStatus.OK);

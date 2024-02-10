@@ -11,7 +11,6 @@ import java.util.TimeZone;
 public class ConvertStringTimeToDates {
     public static String convertStringTimestampToDate(String timeStamp) {
 
-        String dateInString = "22-01-2015 10:15:55 AM";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss a", Locale.ENGLISH);
 
         LocalDateTime dateTime = LocalDateTime.parse(timeStamp, formatter);

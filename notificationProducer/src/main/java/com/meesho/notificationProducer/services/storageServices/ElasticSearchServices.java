@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class ElasticSearchServices {
@@ -21,10 +22,10 @@ public class ElasticSearchServices {
     @Autowired
     ElasticSearchRepository esRepository;
 
-    public Page<ESDocument> getDocumentsByKeyword(String keyword, Integer page) throws IOException {
+    public List<ESDocument> getDocumentsByKeyword(String keyword, Integer page) throws IOException {
         try{
             Pageable pageable = PageRequest.of(page, Constants.ELASTIC_SEARCH_PAGE_SIZE);
-            return esRepository.findByMessageContaining(keyword, pageable);
+            return esRepository.findByMessageContaining(keyword, pageable).getContent();
         } catch (Error e) {
             throw new RuntimeException();
         } catch (Exception ex) {
@@ -32,10 +33,10 @@ public class ElasticSearchServices {
         }
     }
 
-    public Page<ESDocument> getDocumentsByPhoneNumber(String phoneNumber, String startTime, String endTime, Integer page) throws IOException {
+    public List<ESDocument> getDocumentsByPhoneNumber(String phoneNumber, String startTime, String endTime, Integer page) throws IOException {
         try{
             Pageable pageable = PageRequest.of(page, Constants.ELASTIC_SEARCH_PAGE_SIZE);
-            return esRepository.findByPhoneNumberAndCreatedAtBetween(startTime,endTime, phoneNumber, pageable);
+            return esRepository.findByPhoneNumberAndCreatedAtBetween(startTime,endTime, phoneNumber, pageable).getContent();
         } catch (Error e) {
             throw new RuntimeException();
         } catch (Exception ex) {

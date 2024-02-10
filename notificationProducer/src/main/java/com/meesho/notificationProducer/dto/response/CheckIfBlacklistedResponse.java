@@ -5,6 +5,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 
 public class CheckIfBlacklistedResponse extends ResponseObject {
     private Boolean isBlacklisted;

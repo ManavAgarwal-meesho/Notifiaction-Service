@@ -28,12 +28,15 @@ public class SQLDatabaseServices {
 
             logger.info("Status Update Successful");
             return Boolean.TRUE;
-        }
-        catch (Error err) {
+        } catch (Error err) {
 
             logger.error(err.getMessage());
             return Boolean.FALSE;
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+            return Boolean.FALSE;
         }
+
     }
 
     public Boolean updateStatusOnFailure(String requestId, String failureComment){
@@ -49,6 +52,10 @@ public class SQLDatabaseServices {
 
             logger.error(err.getMessage());
             return Boolean.FALSE;
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+            return Boolean.FALSE;
         }
+
     }
 }

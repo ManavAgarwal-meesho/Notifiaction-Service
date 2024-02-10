@@ -59,7 +59,7 @@ public class SMSRequestController {
             producer.publishToTopic(requestId);
 
             SendSMSRequestResponse response = SendSMSRequestResponse.builder()
-                    .comments("Successfully Sent")
+                    .comments("Successfully Queued")
                     .requestId(requestId)
                     .build();
 
