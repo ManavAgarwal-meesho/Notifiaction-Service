@@ -15,7 +15,7 @@ public interface ElasticSearchRepository extends ElasticsearchRepository<ESDocum
 
     public Page<ESDocument> findByMessageContaining(String keyword, Pageable pageable);
 
-    @Query("{\"bool\": {\"must\": [{\"range\": {\"time\": {\"gte\": \"?0\", \"lte\": \"?1\"}}},{\"match\": {\"phone_number\": \"?2\"}}]}}")
+    @Query("{\"bool\": {\"must\": [{\"range\": {\"created_at\": {\"gte\": \"?0\", \"lte\": \"?1\"}}},{\"match\": {\"phone_number\": \"?2\"}}]}}")
     public Page<ESDocument> findByPhoneNumberAndCreatedAtBetween(String startTime, String endTime,String phoneNumber, Pageable pageable);
 
 }

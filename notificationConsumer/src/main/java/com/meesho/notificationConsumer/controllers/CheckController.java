@@ -12,7 +12,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(path="/api")
 public class CheckController {
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<Map<String, String>> hello(){
 
         Map<String, String> response = new HashMap<>();

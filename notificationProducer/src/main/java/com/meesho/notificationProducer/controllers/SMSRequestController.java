@@ -49,6 +49,8 @@ public class SMSRequestController {
             RequestDatabase smsRequest = RequestDatabase.builder()
                     .phoneNumber(phoneNumber)
                     .message(message)
+                    .status("queued")
+                    .statusComment("queued")
                     .build();
 
             /* Step 3 - Store Object in DB and retrieve req_id */

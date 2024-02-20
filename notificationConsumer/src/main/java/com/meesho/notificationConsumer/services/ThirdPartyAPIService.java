@@ -5,6 +5,8 @@ import com.meesho.notificationConsumer.dto.request.thirdPatyAPI.RequestBodyChann
 import com.meesho.notificationConsumer.dto.request.thirdPatyAPI.RequestBodyDestination;
 import com.meesho.notificationConsumer.dto.request.thirdPatyAPI.RequestBodyTemplate;
 import com.meesho.notificationConsumer.dto.request.thirdPatyAPI.RequestChannelSms;
+import com.meesho.notificationConsumer.dto.response.APIResponse;
+import com.meesho.notificationConsumer.dto.response.ThirdPartyAPIResponse;
 import com.meesho.notificationConsumer.models.RequestDatabase;
 import com.meesho.notificationConsumer.repository.RequestDatabaseRepository;
 import org.slf4j.Logger;
@@ -17,15 +19,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ThirdPartyAPIService {
 
     @Autowired
     private RequestDatabaseRepository requestDatabaseRepository;
-
-    @Autowired
-    private RestTemplate restTemplate;
 
     Logger logger = LoggerFactory.getLogger(ThirdPartyAPIService.class);
 
@@ -34,18 +34,24 @@ public class ThirdPartyAPIService {
             String API_KEY = Constants.THIRD_PARTY_API_KEY;
             String API_URL = Constants.THIRD_PARTY_API;
 
-            HttpHeaders requestHeaders   = new HttpHeaders();
+            HttpHeaders requestHeaders = new HttpHeaders();
             requestHeaders.setContentType(MediaType.APPLICATION_JSON);
             requestHeaders.set("key", API_KEY);
+
+            RestTemplate restTemplate = new RestTemplate();
 
             RequestBodyTemplate requestBody = requestBodyBuilder(requestData);
 
             HttpEntity<RequestBodyTemplate> request = new HttpEntity<>(requestBody, requestHeaders);
-            Object response = restTemplate.postForObject(API_URL, request, Object.class);
+            ThirdPartyAPIResponse response = restTemplate.postForObject(API_URL, request, ThirdPartyAPIResponse.class);
 
             logger.info("Response From 3rd Party Api : {}", response);
 
-            return Boolean.TRUE;
+            if(response == null){
+                throw new Error("Third Party API didn't send a response !!");
+            }
+
+            return validate(response);
 
         } catch (Error err){
             logger.error(err.getMessage());
@@ -55,6 +61,22 @@ public class ThirdPartyAPIService {
             logger.error(ex.getMessage());
             return Boolean.FALSE;
         }
+    }
+
+    private Boolean validate(ThirdPartyAPIResponse res){
+
+        List<APIResponse> list = res.getResponse();
+
+        for(APIResponse response : list){
+            logger.info("Response code == {}", response.getCode());
+            if(response.getCode().equalsIgnoreCase("1001")){
+                logger.info("Third Party Response Validation Pass");
+                return true;
+            }
+        }
+        logger.info("3rd Party Response Validation Failed");
+
+        return false;
     }
 
     private RequestBodyTemplate requestBodyBuilder(RequestDatabase requestData) {

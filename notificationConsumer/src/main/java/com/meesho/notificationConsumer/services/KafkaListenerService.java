@@ -78,16 +78,6 @@ public class KafkaListenerService {
                     .phoneNumber(requestData.getPhoneNumber())
                     .build();
 
-            Date date = new Date();
-            Instant instant = date.toInstant();
-
-            // Convert Instant to ZonedDateTime
-            ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(instant, java.time.ZoneId.systemDefault());
-
-            // Print the result
-            System.out.println(zonedDateTime.format(DateTimeFormatter.RFC_1123_DATE_TIME));
-
-
             if(Boolean.TRUE.equals(ESServices.indexToElasticSearchDB(esDocument))) {
                 logger.info("Successfully indexed message to Elastic Search");
             } else {
